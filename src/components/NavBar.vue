@@ -1,20 +1,22 @@
 <template>
   <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
-    <div class="navbar-left">
-      <router-link to="/" class="navbar-item">Stock Trader</router-link>
-      <router-link to="/portfolio" class="navbar-item">Portfolio</router-link>
-      <router-link to="/stocks" class="navbar-item">Stocks</router-link>
-    </div>
-    <div class="navbar-right">
-      <a href="" class="navbar-item">End Day</a>
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a href="" class="navbar-item">Save & Load</a>
-        <div class="navbar-dropdown">
-          <a href="" class="navbar-item">Save Data</a>
-          <a href="" class="navbar-item">Load Data</a>
-        </div>
+    <div class="container">
+      <div class="navbar-left">
+        <router-link to="/" class="navbar-item">Stock Trader</router-link>
+        <router-link to="/portfolio" class="navbar-item">Portfolio</router-link>
+        <router-link to="/stocks" class="navbar-item">Stocks</router-link>
       </div>
-      <div class="navbar-item">Funds: ${{  }}</div>
+      <div class="navbar-right">
+        <a href="" class="navbar-item">End Day</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a href="" class="navbar-item">Save & Load</a>
+          <div class="navbar-dropdown">
+            <a href="" class="navbar-item">Save Data</a>
+            <a href="" class="navbar-item">Load Data</a>
+          </div>
+        </div>
+        <div class="navbar-item">Funds: ${{  }}</div>
+      </div>
     </div>
   </nav>
 </template>
@@ -26,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss">
-.navbar {
+.navbar .container {
   display: flex;
   justify-content: space-between;
 }
