@@ -1,5 +1,8 @@
 <template>
-  <StockCard></StockCard>
+  <div>
+    <h1 class="is-size-2 has-text-centered">Available Stocks</h1>
+    <StockCard></StockCard>
+  </div>
 </template>
 
 <script>
