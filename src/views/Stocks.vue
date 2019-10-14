@@ -1,7 +1,12 @@
 <template>
   <div>
     <h1 class="is-size-2 has-text-centered">Available Stocks</h1>
-    <StockCard></StockCard>
+    <div class="stock-list">
+      <StockCard  v-for="(value, key) in stocks"
+                  :key="key"
+                  :stockName="value.name"
+                  :stockPrice="value.price"></StockCard>
+    </div>
   </div>
 </template>
 
@@ -12,10 +17,18 @@ import StockCard from '@/components/StockCard.vue';
 export default {
   components: {
     StockCard
+  },
+  computed: {
+    stocks() {
+      return this.$store.state.stocks;
+    }
   }
 }
 </script>
 
-<style>
-
+<style lang="scss">
+.stock-list {
+  display: flex;
+  flex-wrap: wrap;
+}
 </style>

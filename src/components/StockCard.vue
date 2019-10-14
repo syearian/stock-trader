@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card stockCard">
     <div class="card-header stockCard--header">
       <h3 class="is-size-4">{{ stockName }} <span class="is-size-7">(Price: {{ stockPrice }})</span></h3>
     </div>
@@ -12,16 +12,14 @@
 
 <script>
 export default {
-  data() {
-    return {
-      stockName: 'BMW',
-      stockPrice: 100
-    }
-  },
+  props: ['stockName', 'stockPrice']
 }
 </script>
 
 <style lang="scss">
+.stockCard {
+  flex: 50%;
+}
 .stockCard--header {
   padding: .25rem 1rem;
 }
