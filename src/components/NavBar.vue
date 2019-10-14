@@ -15,7 +15,7 @@
             <a href="" class="navbar-item">Load Data</a>
           </div>
         </div>
-        <div class="navbar-item">Funds: ${{  }}</div>
+        <div class="navbar-item">Funds: ${{ funds }}</div>
       </div>
     </div>
   </nav>
@@ -23,6 +23,11 @@
 
 <script>
 export default {
+  computed: {
+    funds() {
+      return this.$store.getters.formattedFunds;
+    }
+  }
 
 }
 </script>

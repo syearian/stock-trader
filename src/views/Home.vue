@@ -12,9 +12,9 @@
 
 export default {
   name: 'home',
-  data() {
-    return {
-      funds: 10000
+  computed: {
+    funds() {
+      return this.$store.getters.formattedFunds;
     }
   }
 }

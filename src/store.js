@@ -28,7 +28,8 @@ export default new Vuex.Store({
   },
   getters: {
     formattedFunds: (state) => {
-      return state.funds.toFixed(0).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      return state.funds.format();
+      // return state.funds.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     }
   },
   mutations: {
