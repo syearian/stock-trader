@@ -4,8 +4,7 @@
     <div class="stock-list">
       <StockCard  v-for="(value, key) in stocks"
                   :key="key"
-                  :stockName="value.name"
-                  :stockPrice="value.price"></StockCard>
+                  :stockName="value.name"></StockCard>
     </div>
   </div>
 </template>

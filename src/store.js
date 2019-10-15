@@ -6,19 +6,19 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     stocks: {
-      bmw: {
+      BMW: {
         name: 'BMW',
         price: 110
       },
-      google: {
+      Google: {
         name: 'Google',
         price: 200
       },
-      apple: {
+      Apple: {
         name: 'Apple',
         price: 250
       },
-      twitter: {
+      Twitter: {
         name: 'Twitter',
         price: 30
       }
@@ -33,9 +33,30 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    buyStock: (state, payload) => {
+      if (payload.quantity > 0) {
+        if (state.portfolio[payload.name]) {
+          state.portfolio[payload.name].quantity += payload.quantity;
+        } else {
+          state.portfolio[payload.name] = {
+            ...payload
+          }
+        }
+        state.funds -= state.stocks[payload.name].price * payload.quantity;
+        // state.portfolio[payload.name].name = payload.name;
+        // state.portfolio[payload.name].quantity = payload.quantity;
+      }
+    },
+    sellStock: (state, payload) => {
 
+    }
   },
   actions: {
-
+    buyStock: ({ commit }, payload) => {
+      commit('buyStock', payload);
+    },
+    sellStock: ({ commit }, payload) => {
+      commit('sellStock', payload);
+    }
   }
 })
