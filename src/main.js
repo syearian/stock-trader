@@ -1,9 +1,12 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import axios from 'axios';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+axios.defaults.baseURL = 'https://stock-trader-d03f3.firebaseio.com';
 
 /**
  * Number.prototype.format(n, x)

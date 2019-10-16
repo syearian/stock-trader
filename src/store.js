@@ -1,5 +1,6 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import axios from 'axios';
 
 Vue.use(Vuex)
 
@@ -60,7 +61,7 @@ export default new Vuex.Store({
         }
       }
     },
-    endDay: (state, payload) => {
+    endDay: (state) => {
       for (const key in state.stocks) {
         let randomNum = Math.floor(Math.random() * 60) - 30;
         state.stocks[key].price += randomNum;
@@ -68,6 +69,11 @@ export default new Vuex.Store({
           state.stocks[key].price = 1;
         }
       }
+    },
+    loadData: (state, payload) => {
+      state.stocks = payload.stocks;
+      state.funds = payload.funds;
+      state.portfolio = payload.portfolio;
     }
   },
   actions: {
@@ -77,8 +83,17 @@ export default new Vuex.Store({
     sellStock: ({ commit }, payload) => {
       commit('sellStock', payload);
     },
-    endDay: ({ commit }, payload) => {
-      commit('endDay', payload);
+    endDay: ({ commit }) => {
+      commit('endDay');
+    },
+    loadData: ({ commit }) => {
+      axios.get('/saved.json')
+        .then(res => {
+          const data = res.data;
+          console.log(data);
+          commit('loadData', data);
+        })
+        .catch(error => console.log(error));
     }
   }
 })

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
     <div class="container">
       <div class="navbar-left">
         <router-link to="/" class="navbar-item">Stock Trader</router-link>
@@ -11,10 +11,12 @@
             class="navbar-item"
             @click.prevent="endDay">End Day</a>
         <div class="navbar-item has-dropdown is-hoverable">
-          <a href="" class="navbar-item">Save & Load</a>
-          <div class="navbar-dropdown">
-            <a href="" class="navbar-item">Save Data</a>
-            <a href="" class="navbar-item">Load Data</a>
+          <a class="navbar-item">Save & Load</a>
+          <div class="navbar-dropdown has-background-primary">
+            <a  class="navbar-item"
+                @click.prevent="saveData">Save Data</a>
+            <a  class="navbar-item"
+                @click.prevent="loadData">Load Data</a>
           </div>
         </div>
         <div class="navbar-item">Funds: ${{ funds }}</div>
@@ -25,6 +27,7 @@
 
 <script>
   import { mapActions } from 'vuex';
+  import axios from 'axios';
 
   export default {
     computed: {
@@ -34,8 +37,15 @@
     },
     methods: {
       ...mapActions([
-        'endDay'
-      ])
+        'endDay',
+        'loadData'
+      ]),
+      saveData() {
+        const stockData = this.$store.state;
+        axios.put('/saved.json', stockData)
+          .then(res => console.log(res))
+          .catch(error => console.log(error));
+      }
     }
   }
 </script>
