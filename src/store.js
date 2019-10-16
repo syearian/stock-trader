@@ -59,6 +59,15 @@ export default new Vuex.Store({
           state.funds += state.stocks[payload.name].price * payload.quantity;
         }
       }
+    },
+    endDay: (state, payload) => {
+      for (const key in state.stocks) {
+        let randomNum = Math.floor(Math.random() * 60) - 30;
+        state.stocks[key].price += randomNum;
+        if (state.stocks[key].price < 1) {
+          state.stocks[key].price = 1;
+        }
+      }
     }
   },
   actions: {
@@ -68,8 +77,8 @@ export default new Vuex.Store({
     sellStock: ({ commit }, payload) => {
       commit('sellStock', payload);
     },
-    // endDay: ({ commit }, payload) => {
-    //   commit('endDay', payload);
-    // }
+    endDay: ({ commit }, payload) => {
+      commit('endDay', payload);
+    }
   }
 })

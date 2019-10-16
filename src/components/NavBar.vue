@@ -7,7 +7,9 @@
         <router-link to="/stocks" class="navbar-item">Stocks</router-link>
       </div>
       <div class="navbar-right">
-        <a href="" class="navbar-item">End Day</a>
+        <a  href=""
+            class="navbar-item"
+            @click.prevent="endDay">End Day</a>
         <div class="navbar-item has-dropdown is-hoverable">
           <a href="" class="navbar-item">Save & Load</a>
           <div class="navbar-dropdown">
@@ -22,14 +24,20 @@
 </template>
 
 <script>
-export default {
-  computed: {
-    funds() {
-      return this.$store.getters.formattedFunds;
+  import { mapActions } from 'vuex';
+
+  export default {
+    computed: {
+      funds() {
+        return this.$store.getters.formattedFunds;
+      }
+    },
+    methods: {
+      ...mapActions([
+        'endDay'
+      ])
     }
   }
-
-}
 </script>
 
 <style lang="scss">
