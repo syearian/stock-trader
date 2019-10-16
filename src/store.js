@@ -48,7 +48,17 @@ export default new Vuex.Store({
       }
     },
     sellStock: (state, payload) => {
+      if (payload.quantity > 0) {
+        if (payload.quantity > state.portfolio[payload.name].quantity) {
+          state.funds += state.stocks[payload.name].price * state.portfolio[payload.name].quantity;
+          
+          state.portfolio[payload.name].quantity = 0;
+        } else {
+          state.portfolio[payload.name].quantity -= payload.quantity;
 
+          state.funds += state.stocks[payload.name].price * payload.quantity;
+        }
+      }
     }
   },
   actions: {
@@ -57,6 +67,9 @@ export default new Vuex.Store({
     },
     sellStock: ({ commit }, payload) => {
       commit('sellStock', payload);
-    }
+    },
+    // endDay: ({ commit }, payload) => {
+    //   commit('endDay', payload);
+    // }
   }
 })
