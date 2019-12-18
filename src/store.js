@@ -31,10 +31,13 @@ export default new Vuex.Store({
     formattedFunds: (state) => {
       return state.funds.format();
       // return state.funds.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    },
+    getPortfolio (state) {
+      return state.portfolio;
     }
   },
   mutations: {
-    buyStock: (state, payload) => {
+    buyStock (state, payload) {
       if (payload.quantity > 0) {
         if (state.portfolio[payload.name]) {
           state.portfolio[payload.name].quantity += payload.quantity;
@@ -48,7 +51,7 @@ export default new Vuex.Store({
         // state.portfolio[payload.name].quantity = payload.quantity;
       }
     },
-    sellStock: (state, payload) => {
+    sellStock (state, payload) {
       if (payload.quantity > 0) {
         if (payload.quantity > state.portfolio[payload.name].quantity) {
           state.funds += state.stocks[payload.name].price * state.portfolio[payload.name].quantity;
@@ -59,9 +62,13 @@ export default new Vuex.Store({
 
           state.funds += state.stocks[payload.name].price * payload.quantity;
         }
+        // if (state.portfolio[payload.name].quantity === 0) {
+        //   console.log(state.portfolio);
+        //   delete state.portfolio[payload.name];
+        // }
       }
     },
-    endDay: (state) => {
+    endDay (state) {
       for (const key in state.stocks) {
         let randomNum = Math.floor(Math.random() * 60) - 30;
         state.stocks[key].price += randomNum;
@@ -70,23 +77,23 @@ export default new Vuex.Store({
         }
       }
     },
-    loadData: (state, payload) => {
+    loadData (state, payload) {
       state.stocks = payload.stocks;
       state.funds = payload.funds;
       state.portfolio = payload.portfolio;
     }
   },
   actions: {
-    buyStock: ({ commit }, payload) => {
+    buyStock ({ commit }, payload) {
       commit('buyStock', payload);
     },
-    sellStock: ({ commit }, payload) => {
+    sellStock ({ commit }, payload) {
       commit('sellStock', payload);
     },
-    endDay: ({ commit }) => {
+    endDay ({ commit }) {
       commit('endDay');
     },
-    loadData: ({ commit }) => {
+    loadData ({ commit }) {
       axios.get('/saved.json')
         .then(res => {
           const data = res.data;

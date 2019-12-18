@@ -12,15 +12,19 @@
 <script>
 // @ is an alias to /src
 import PortfolioCard from '@/components/PortfolioCard.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
     PortfolioCard
   },
   computed: {
-    portfolio() {
-      return this.$store.state.portfolio;
-    }
+    ...mapGetters({
+      portfolio: 'getPortfolio'
+    })
+    // portfolio() {
+    //   return this.$store.state.portfolio;
+    // }
   }
 }
 </script>
